@@ -31,7 +31,7 @@ public class App {
         String cause = request.queryParams("cause");
         int size = Integer.parseInt.request.queryParams("size");
          Squad newSquad = new Squad(name,cause,size);
-          squads.add(newSquad); 
+         squads.add(newSquad); 
   
         model.put("template", "templates/squad-success.vtl");
         return new ModelAndView(model, layout);

@@ -1,5 +1,20 @@
 <h1>Squad list!</h1>
 
+#if ($squads)
+  <ul>
+     #foreach($squad in $squads)
+       <li>
+         <p>$squad.getName()</p>
+         <p>$squad.getCause()</p>
+         <p>$squad.getSize()</p>
+       </li>
+    </ul>
+  <p>Current squad:</p>
+ 
+#else
+  <p>No squads!</p>
+#end
+
 <p>Add a new Squad:</p>
 
 <form action="/squads" method="post">
