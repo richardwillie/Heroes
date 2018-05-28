@@ -1,23 +1,23 @@
 public class Squad {
-    private String squadName;
-    private String squadCause;
-    private int squadSize;
+    private String Name;
+    private String Cause;
+    private int Size;
 
   
     public Squad(String name,String cause, int size) {
-      squadName = name;
-      squadCause = cause;
-      squadSize = size;
+      Name = name;
+      Cause = cause;
+      Size = size;
 
     }
   
     public String getName() {
-      return squadName;
+      return Name;
     }
     public String getCause() {
-        return squadCause;
+        return Cause;
       }
       public int getSize() {
-        return squadSize;
+        return Size;
       }
   }

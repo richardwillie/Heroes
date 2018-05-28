@@ -1,11 +1,10 @@
-
 /*
  * Copyright 2013 Per Wendel
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- *
+ *  
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,11 +13,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *//*  * Copyright 2013 Per Wendel  *  *  Licensed 
+ */
 package spark.template.velocity;
 
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.velocity.Template;
@@ -34,6 +35,7 @@ import spark.TemplateEngine;
 public class VelocityTemplateEngine extends TemplateEngine {
 
     private final VelocityEngine velocityEngine;
+    private String encoding;
 
     /**
      * Constructor
@@ -44,7 +46,17 @@ public class VelocityTemplateEngine extends TemplateEngine {
         properties.setProperty(
                 "class.resource.loader.class",
                 "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-        velocityEngine = new org.apache.velocity.app.VelocityEngine(properties);
+        this.velocityEngine = new org.apache.velocity.app.VelocityEngine(properties);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param encoding The encoding to use
+     */
+    public VelocityTemplateEngine(String encoding) {
+        this();
+        this.encoding = encoding;
     }
 
     /**
@@ -64,7 +76,8 @@ public class VelocityTemplateEngine extends TemplateEngine {
      */
     @Override
     public String render(ModelAndView modelAndView) {
-        Template template = velocityEngine.getTemplate(modelAndView.getViewName());
+        String templateEncoding = Optional.ofNullable(this.encoding).orElse(StandardCharsets.UTF_8.name());
+        Template template = velocityEngine.getTemplate(modelAndView.getViewName(), templateEncoding);
         Object model = modelAndView.getModel();
         if (model instanceof Map) {
             Map<?, ?> modelMap = (Map<?, ?>) model;
