@@ -1,9 +1,9 @@
 <h1>Squad list!</h1>
   <p>Current Squad:</p>
-#if ($Squads)
+#if($squads)
   <ul>
-    #foreach ($squad in $squads)
-      <li>Squad Name: $Squad.getName(), Squad Cause:  $Squad.getCause(), Squad Size:  $Squad.getSize()</li>
+    #foreach($squad in $squads)
+      <li>Squad Name: $squad.getName(), squad Cause:  $squad.getCause(), Squad Size:  $squad.getSize() | <a href="/squad/$squad.getId()">View Squad Members</a></li>
     #end
   </ul>
 #else
@@ -29,16 +29,16 @@
 <form action="/hero" method="post">
   <label for="name">Hero name</label>
   <input id="name" name="name" type="text">
-
+  <br>
   <label for="name">Hero's age.</label>
   <input id="age" name="age" type="number">
-
+  <br>
   <label for="name">Hero's special power.</label>
   <input id="power" name="power" type="text">
-
+  <br>
   <label for="name">Hero's weakness.</label>
   <input id="weakness" name="weakness" type="text">
-
+  <br>
   <label for="name">Hero's squad.</label>
   <select class="form-control select2" data-placeholder="Choose Browser" name="heroSquad">
     <option label="">- Select Squad -</option>
@@ -46,14 +46,14 @@
     <option value="$squad.getId()">$squad.getName()</option>
     #end
   </select>
-
+  <br>
   <button type="submit" class="btn btn-default">Add Hero</button>
 </form>
 
-#if ($heros)
+#if ($heroes)
   <p>Heros:</p>
-  #foreach ($hero in $heros)
-  <p>Hero Name: $hero.getName(), Hero Age: $hero.getAge(), Hero Power: $hero.getPower(), Hero Weakness: $hero.getWeakness(), Hero Squad: $hero.getSquad()</p>
+  #foreach ($hero in $heroes)
+  <p>Hero Name: $hero.getName(), Hero Age: $hero.getAge(), Hero Power: $hero.getPower(), Hero Weakness: $hero.getWeakness()</p>
   #end
 #else
   <p>No hero!</p>

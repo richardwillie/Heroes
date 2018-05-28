@@ -1,0 +1,9 @@
+<h1>$squadMembers.getName()</h1>
+<ul>
+    #foreach($members in $squadMembers.getHeroes())
+    <li>
+        <h4 class="hero-name">$members.getName() ($members.getAge() yrs)</h4>
+        <small><strong class="text-success">Special Power: </strong>$members.getPower() | <strong class="text-danger">Weakness: </strong>$members.getWeakness()</small>
+    </li>
+    #end
+</ul>

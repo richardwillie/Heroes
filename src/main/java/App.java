@@ -11,42 +11,45 @@ import static spark.Spark.*;
 
 public class App {
   public static void main(String[] args) {
+    ProcessBuilder process = new ProcessBuilder();
+     Integer port;
+     if (process.environment().get("PORT") != null) {
+         port = Integer.parseInt(process.environment().get("PORT"));
+     } else {
+         port = 4567;
+     }
+
+    setPort(port);
+    
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      model.put("squads", Squad.all());
+      model.put("heroes", Hero.all());
       model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/squad/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Squad squadMembers = Squad.find(Integer.parseInt(request.params(":id")));
+      model.put("squadMembers", squadMembers);
+      model.put("template", "templates/squad.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
   post("/squads", (request, Response)->{
     Map<String, Object> model = new HashMap<String, Object>();
 
-    ArrayList<Squad> squads = request.session().attribute("squads");
-    if (squads == null) {
-      squads = new ArrayList<Squad>();
-      request.session().attribute("squads", squads);
-    }
-
     String name = request.queryParams("name");
     int size = Integer.parseInt(request.queryParams("size"));
     String cause = request.queryParams("cause");
     Squad newSquad = new Squad(name, cause, size);
-    request.session().attribute("squad", newSquad);
-
     model.put("template", "templates/squad-success.vtl");
     return new ModelAndView(model, layout);  
   }, new VelocityTemplateEngine());
-
-  get("/", (request, response) -> {
-    Map<String, Object> model = new HashMap<String, Object>();
-    model.put("squads", Squad.all());
-    model.put("heroes", Hero.all());
-    model.put("template", "templates/index.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
-}
 
 post("/hero", (request, response) -> {
   Map<String, Object> model = new HashMap<String, Object>();
@@ -60,6 +63,10 @@ post("/hero", (request, response) -> {
   Hero newHero = new Hero(name, age, power, weakness, heroSquad);
   squad.addHero(newHero);
 
-  model.put("template", "templates/heroSuccess.vtl");
+  model.put("template", "templates/hero-success.vtl");
   return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
+
+ 
+  }
+}
