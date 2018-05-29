@@ -1,7 +1,18 @@
-.body {
-    background-image: url(images/joker.jpg);
+body {
+    background-image: url(../images/deadpool.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .mb12 {
     margin-bottom: 20px;
+    color: white;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+}
+
+.header {
+    color: aqua
 }

@@ -1,3 +1,4 @@
+<div class="header">
 <h1>Squad list!</h1>
   <p>Current Squad:</p>
 #if($squads)
@@ -11,6 +12,7 @@
 #end
 
 <p>Add a new Squad:</p>
+</div>
 
 <form action="/squads" method="post">
   <label for=""></label>
@@ -22,10 +24,10 @@
 
   <button type="submit" class="btn btn-default">Add Squad</button>
 </form>
-
-<h1>Hero list!</h1>
-<p>Add a new hero:</p>
-
+<div class="header">
+  <h1>Hero list!</h1>
+  <p>Add a new hero:</p>
+</div>
 <form action="/hero" method="post">
  <div class="mb12">
   <label for="name">Hero name</label>
@@ -47,8 +49,9 @@
   <input id="weakness" name="weakness" type="text">
   </div>
   <br>
-  
-  <label for="name">Hero's squad.</label>
+  <div class="header">
+    <label for="name">Hero's squad.</label>
+  </div>
   <select class="form-control select2" data-placeholder="Choose Browser" name="heroSquad">
     <option label="">- Select Squad -</option>
     #foreach ($squad in $squads)
