@@ -39,7 +39,7 @@ This application enables stylists to manage their  varios clients efficoently
 * The hair salon was written by: Richard Willie 
 * link to the live site is:https://salty-crag-23681.herokuapp.com/
 
-* the link to the github repository is:
+* the link to the github repository is:https://github.com/richardwillie/Heroes
 
 * this project has been licensed under the MIT licesnse.
 
